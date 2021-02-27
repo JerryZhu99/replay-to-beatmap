@@ -1,0 +1,15 @@
+{
+  "name": "replay-to-beatmap",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jerry Zhu",
+  "license": "MIT",
+  "dependencies": {
+    "osu-bpdpc": "^0.3.0",
+    "osureplayparser": "^1.0.1"
+  }
+}

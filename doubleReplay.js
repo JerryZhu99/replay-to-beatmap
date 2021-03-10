@@ -10,7 +10,6 @@ const path = require('path');
   replay.replay_data = replay.replay_data
     .split(',')
     .map(e => e.split('|'))
-    .filter(([time]) => time > 0)
     .map(([time, x, y, ...pressed]) => (time > 0 ? [time, x | x << 4, y, ...pressed] : [time, x, y, ...pressed]))
     .map(e => e.join('|'))
     .join(',');

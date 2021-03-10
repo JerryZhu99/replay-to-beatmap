@@ -53,7 +53,7 @@ node doubleReplay.js <input .osr file> output/out.osu
 ```
 e.g.
 ```
-node doubleReplay.js "Colorful Sounds Port - ETERNAL DRAIN (Wh1teh) [Eternal by Player0].osu" output/out.osu
+node doubleReplay.js "Player0 - Colorful Sounds Port - ETERNAL DRAIN [Eternal] (2021-02-25) OsuMania" output/out.osu
 ```
 This will create a .osr file in the output folder with the same name as the original replay file.
 

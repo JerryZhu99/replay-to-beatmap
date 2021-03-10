@@ -8,13 +8,14 @@ const path = require('path');
   const replayPath = process.argv[3];
 
   const beatmap = Beatmap.fromOsu(await fs.readFile(beatmapPath, { encoding: 'utf-8' }));
-  const { replay_data: replay, playerName } = osuReplayParser.parseReplay(replayPath);
+  const replay = osuReplayParser.parseReplay(replayPath);
+  const { replay_data: replayData, playerName } = replay;
 
   const { Artist, Title, Creator, Version } = beatmap.Metadata
-  const outputFilename = `${Artist} - ${Title} (${Creator}) [${Version} by ${playerName}].osu`
+  const outputFilename = `${Artist} - ${Title} (${Creator}) [${Version} played by ${playerName}].osu`
   const outputPath = path.join('output', outputFilename)
 
-  beatmap.Metadata.Version = `${Version} by ${playerName}`;
+  beatmap.Metadata.Version = `${Version} played by ${playerName}`;
   const keyCount = beatmap.Difficulty.CircleSize;
   const keys = new Array().fill(false);
 
@@ -30,12 +31,12 @@ const path = require('path');
       additionSet: 0,
       customIndex: 0,
       sampleVolume: 0,
-      filename: '',
+      filename: 'none.wav',
     }
   })
   let currentTime = 0;
-  for (let i = 0; i < replay.length; i++) {
-    let { keysPressed, timeSinceLastAction } = replay[i];
+  for (let i = 0; i < replayData.length; i++) {
+    let { keysPressed, timeSinceLastAction } = replayData[i];
     currentTime += timeSinceLastAction;
     for (let j = 0; j < keyCount; j++) {
       if (keysPressed[`Key${j + 1}`] && !keys[j]) {
@@ -47,5 +48,6 @@ const path = require('path');
   beatmap.HitObjects = newObjects;
 
   fs.writeFile(outputPath, beatmap.toOsu());
+  console.log(`Created file ${outputPath}`);
 })();
 

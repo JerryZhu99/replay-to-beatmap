@@ -9,6 +9,7 @@
   "author": "Jerry Zhu",
   "license": "MIT",
   "dependencies": {
+    "node-osr": "^1.2.1",
     "osu-bpdpc": "^0.3.0",
     "osureplayparser": "^1.0.1"
   }
